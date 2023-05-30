@@ -1,0 +1,87 @@
+/*
+ * File: CheckerboardKarel.java
+ * ----------------------------
+ * When you finish writing it, the CheckerboardKarel class should draw
+ * a checkerboard using beepers, as described in Assignment 1.  You
+ * should make sure that your program works for all of the sample
+ * worlds supplied in the starter folder.
+ */
+
+import stanford.karel.*;
+
+public class CheckerboardKarel extends SuperKarel {
+
+	// You fill in this part
+	public void run(){
+		int oddEvenCounter = 1;
+		do{
+			putBeeper();
+			if(frontIsClear()){
+				move();
+				if(frontIsClear()){
+					move();
+					if(frontIsBlocked()){
+						setFaceNorth();
+						putBeeper();
+						if(frontIsClear()){
+							move();
+							oddEvenCounter++;
+							if(oddEvenCounter % 2 == 1){
+								setFaceEast();
+							}
+							else{
+								setFaceWest();
+								move();
+							}
+						}
+					}
+				}
+				else{
+					setFaceNorth();
+					if(frontIsClear()){
+						move();
+						oddEvenCounter++;
+						if(oddEvenCounter % 2 == 1){
+							setFaceEast();
+						}
+						else{
+							setFaceWest();
+						}
+					}
+					else{
+						break;
+					}
+				}
+			}
+			else{
+				setFaceNorth();
+				if(frontIsClear()){
+					move();
+					oddEvenCounter++;
+					if(frontIsClear()){
+						move();
+						oddEvenCounter++;
+					}
+				}
+			}
+		}while(frontIsClear());
+	}
+	
+	public void setFaceNorth(){
+		while(notFacingNorth()){
+			turnLeft();
+		}
+	}
+	
+	public void setFaceWest(){
+		while(notFacingWest()){
+			turnLeft();
+		}
+	}
+	
+	public void setFaceEast(){
+		while(notFacingEast()){
+			turnLeft();
+		}
+	}
+}
