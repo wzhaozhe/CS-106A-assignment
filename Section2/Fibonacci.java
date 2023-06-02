@@ -10,7 +10,7 @@ import acm.program.*;
 
 public class Fibonacci extends ConsoleProgram{
 	
-	private int MAX_TERM = 10000;
+	private static final int MAX_TERM = 10000;
 	
 	public void run(){
 		println("This program lists the Fibonacci sequence.");
